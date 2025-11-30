@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Label Detective{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-brand">
+          <span class="brand-icon">🔍</span>
+          <span class="brand-text">Label Detective</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('profile') }}">Profile</a></li>
+          <li><a href="{{ url_for('history') }}">History</a></li>
+          <li><a href="{{ url_for('admin_evaluate') }}">Admin</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Disclaimer Banner (shown on first visit) -->
+    {% if not session.get('disclaimer_accepted') %}
+    <div class="disclaimer-banner" id="disclaimer">
+      <div class="container">
+        <p>
+          <strong>⚠️ Medical Disclaimer:</strong> Label Detective is an
+          informational tool and NOT a substitute for professional medical
+          advice. Always consult healthcare professionals for dietary and
+          allergy concerns.
+        </p>
+        <button onclick="acceptDisclaimer()" class="btn btn-small">
+          I Understand
+        </button>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main class="main-content">{% block content %}{% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>
+          &copy; 2025 Label Detective | Built for educational purposes |
+          <a href="#privacy">Privacy Policy</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+      function acceptDisclaimer() {
+        fetch("/api/accept_disclaimer", { method: "POST" }).then(
+          () => (document.getElementById("disclaimer").style.display = "none")
+        );
+      }
+    </script>
+    {% block extra_scripts %}{% endblock %}
+  </body>
+</html>

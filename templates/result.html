@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% block title %}Scan Result - Label Detective{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Verdict Badge -->
+    <div class="verdict-card verdict-{{ verdict.verdict }}">
+        <div class="verdict-icon">
+            {% if verdict.verdict == 'safe' %}
+                ✓
+            {% elif verdict.verdict == 'caution' %}
+                ⚠
+            {% else %}
+                ✗
+            {% endif %}
+        </div>
+        <div class="verdict-content">
+            <h1 class="verdict-title">{{ verdict.verdict | upper }}</h1>
+            <p class="verdict-summary">{{ verdict.summary }}</p>
+            {% if verdict.severity %}
+            <span class="severity-badge severity-{{ verdict.severity }}">Severity: {{ verdict.severity }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-number">{{ verdict.safe_count }}</div>
+            <div class="stat-label">Safe Ingredients</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ verdict.conflict_count }}</div>
+            <div class="stat-label">Conflicts Detected</div>
+        </div>
+    </div>
+
+    <!-- Details -->
+    {% if verdict.details %}
+    <div class="details-section">
+        <h2>Explanation</h2>
+        <div class="details-content">{{ verdict.details | safe }}</div>
+    </div>
+    {% endif %}
+
+    <!-- Ingredient Table -->
+    {% if verdict.ingredient_table %}
+    <div class="table-section">
+        <h2>Per-Ingredient Breakdown</h2>
+        <div class="table-responsive">
+            <table class="ingredient-table">
+                <thead>
+                    <tr>
+                        <th>Ingredient</th>
+                        <th>Tags</th>
+                        <th>Status</th>
+                        <th>Reason</th>
+                        <th>Evidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in verdict.ingredient_table %}
+                    <tr class="row-{{ row.conflict }}">
+                        <td class="ingredient-name">{{ row.canonical_name }}</td>
+                        <td class="ingredient-tags">{{ row.tags }}</td>
+                        <td>
+                            <span class="conflict-badge conflict-{{ row.conflict }}">
+                                {{ row.conflict }}
+                            </span>
+                            {% if row.severity %}
+                            <span class="severity-tag">{{ row.severity }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="reason-cell">{{ row.reason }}</td>
+                        <td class="evidence-cell">
+                            {% if row.evidence %}
+                                {% for ev in row.evidence %}
+                                <a href="{{ ev.url }}" target="_blank" class="evidence-link">{{ ev.title }}</a><br>
+                                {% endfor %}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Alternatives -->
+    {% if verdict.alternatives %}
+    <div class="alternatives-section">
+        <h2>Suggested Alternatives</h2>
+        <div class="alternatives-grid">
+            {% for alt in verdict.alternatives %}
+            <div class="alternative-card">
+                <h3>{{ alt.product_name }}</h3>
+                <p>{{ alt.reason }}</p>
+                <a href="{{ alt.link }}" target="_blank" class="btn btn-small">Learn More</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Trace Accordion -->
+    <div class="accordion">
+        <button class="accordion-trigger" onclick="toggleAccordion('trace')">
+            <span>🔍 View Trace Details</span>
+            <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content" id="trace-content">
+            <h3>Session Trace</h3>
+            <p><strong>Session ID:</strong> {{ session_id }}</p>
+            <p><strong>Trace ID:</strong> {{ trace_id }}</p>
+            
+            <div class="trace-timeline">
+                {% for event in trace %}
+                <div class="trace-event">
+                    <div class="trace-agent">{{ event.agent }}</div>
+                    <div class="trace-summary">{{ event.result_summary }}</div>
+                    {% if event.duration_ms %}
+                    <div class="trace-duration">{{ "%.2f"|format(event.duration_ms) }}ms</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if extraction %}
+            <h3>Extraction Details</h3>
+            <p><strong>Method:</strong> {{ extraction.method }}</p>
+            <p><strong>Confidence:</strong> {{ "%.1f"|format(extraction.confidence * 100) }}%</p>
+            <p><strong>Ingredients Found:</strong> {{ extraction.ingredients | length }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions-bar">
+        <button onclick="saveToHistory()" class="btn btn-secondary">💾 Save to History</button>
+        <button onclick="showBlockModal()" class="btn btn-secondary">🚫 Block Ingredient</button>
+        <button onclick="reportWrong()" class="btn btn-secondary">⚠️ Report Issue</button>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">🔍 Scan Another</a>
+    </div>
+</div>
+
+<!-- Block Ingredient Modal -->
+<div id="blockModal" class="modal">
+    <div class="modal-content">
+        <h2>Block an Ingredient</h2>
+        <p>Select an ingredient to add to your blocklist:</p>
+        <select id="blockIngredientSelect" class="form-control">
+            {% for row in verdict.ingredient_table %}
+            <option value="{{ row.canonical_name }}">{{ row.canonical_name }}</option>
+            {% endfor %}
+        </select>
+        <div class="modal-actions">
+            <button onclick="blockIngredient()" class="btn btn-primary">Block</button>
+            <button onclick="closeModal()" class="btn btn-secondary">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAccordion(id) {
+    const content = document.getElementById(id + '-content');
+    content.classList.toggle('active');
+}
+
+function saveToHistory() {
+    fetch('/api/save_to_history', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            session_id: '{{ session_id }}',
+            summary: '{{ verdict.summary }}',
+            verdict: '{{ verdict.verdict }}',
+            timestamp: new Date().toISOString()
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        showToast('Saved to history!');
+    });
+}
+
+function showBlockModal() {
+    document.getElementById('blockModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('blockModal').style.display = 'none';
+}
+
+function blockIngredient() {
+    const select = document.getElementById('blockIngredientSelect');
+    const ingredient = select.value;
+    
+    fetch('/api/block_ingredient', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ingredient: ingredient})
+    })
+    .then(res => res.json())
+    .then(data => {
+        showToast(`Blocked ${ingredient}!`);
+        closeModal();
+    });
+}
+
+function reportWrong() {
+    alert('Thank you! Feedback feature coming soon.');
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+</script>
+{% endblock %}

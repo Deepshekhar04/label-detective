@@ -1,0 +1,93 @@
+raw_name,canonical_name,synonyms,category
+E1520,Propylene glycol,PG|1520,additive
+E120,Cochineal,Carmine|Carminic acid,dye|animal-derived
+E100,Curcumin,Turmeric extract,dye|natural
+E102,Tartrazine,Yellow 5,dye|synthetic
+E110,Sunset Yellow,Yellow 6,dye|synthetic
+E122,Carmoisine,Azorubine|Red 3,dye|synthetic
+E124,Ponceau 4R,Red 7,dye|synthetic
+E129,Allura Red,Red 40,dye|synthetic
+E131,Patent Blue V,Blue 5,dye|synthetic
+E132,Indigotine,Blue 2,dye|synthetic
+E133,Brilliant Blue,Blue 1,dye|synthetic
+E200,Sorbic acid,2-Propenoic acid,preservative
+E202,Potassium sorbate,Potassium salt,preservative
+E211,Sodium benzoate,Benzoate of soda,preservative
+E220,Sulphur dioxide,SO2,preservative|allergen
+E250,Sodium nitrite,Nitrite,preservative
+E300,Ascorbic acid,Vitamin C,antioxidant
+E301,Sodium ascorbate,Vitamin C sodium,antioxidant
+E304,Fatty acid esters,Ascorbyl palmitate,antioxidant
+E306,Tocopherol,Vitamin E,antioxidant|natural
+E320,Butylated hydroxyanisole,BHA,antioxidant|synthetic
+E321,Butylated hydroxytoluene,BHT,antioxidant|synthetic
+E322,Lecithin,Soy lecithin,emulsifier
+E330,Citric acid,Lemon acid,acidity-regulator
+E331,Sodium citrate,Trisodium citrate,acidity-regulator
+E338,Phosphoric acid,Orthophosphoric acid,acidity-regulator
+E412,Guar gum,Guaran,thickener|natural
+E415,Xanthan gum,Xanthan,thickener
+E420,Sorbitol,Glucitol,sweetener
+E421,Mannitol,Manna sugar,sweetener
+E422,Glycerol,Glycerin,humectant
+E440,Pectin,Fruit pectin,gelling-agent|natural
+E450,Diphosphates,Pyrophosphate,emulsifier|acidity-regulator
+E451,Triphosphates,Sodium tripolyphosphate,emulsifier
+E500,Sodium carbonates,Baking soda,acidity-regulator
+E621,Monosodium glutamate,MSG,flavor-enhancer
+Palm Oil,Palm oil,Elaeis guineensis,oil|sustainability-concern
+Palm Kernel Oil,Palm kernel oil,PKO,oil|sustainability-concern
+Peanut Oil,Peanut oil,Groundnut oil,oil|allergen
+Soy Oil,Soybean oil,Soya oil,oil|allergen
+Milk,Milk,Dairy|Lactose,allergen|animal-derived
+Eggs,Egg,Whole egg,allergen|animal-derived
+Wheat,Wheat,Triticum,allergen|gluten
+Soy,Soybean,Soya,allergen
+Peanuts,Peanut,Groundnut,allergen
+Tree Nuts,Tree nut,Nuts,allergen
+Fish,Fish,Seafood,allergen|animal-derived
+Shellfish,Shellfish,Crustacean,allergen|animal-derived
+Sesame,Sesame seed,Sesamum,allergen
+Gelatin,Gelatin,Gelatine,animal-derived
+Carmine,Carmine,Cochineal|E120,dye|animal-derived
+Honey,Honey,Bee honey,animal-derived
+Whey,Whey,Milk whey,allergen|animal-derived
+Casein,Casein,Milk protein,allergen|animal-derived
+Lactose,Lactose,Milk sugar,allergen|animal-derived
+Gluten,Gluten,Wheat protein,allergen
+High Fructose Corn Syrup,High fructose corn syrup,HFCS|Corn syrup,sweetener|processed
+Aspartame,Aspartame,E951,sweetener|artificial
+Sucralose,Sucralose,E955,sweetener|artificial
+Maltodextrin,Maltodextrin,Malto dextrin,thickener|processed
+Modified Starch,Modified starch,Modified food starch,thickener|processed
+Carrageenan,Carrageenan,E407,thickener|seaweed
+Agar,Agar,Agar-agar|E406,gelling-agent|seaweed
+Corn Starch,Corn starch,Maize starch,thickener
+Tapioca Starch,Tapioca starch,Cassava starch,thickener
+Rice Flour,Rice flour,Ground rice,flour|gluten-free
+Almond Flour,Almond flour,Ground almonds,flour|nut|gluten-free
+Coconut Oil,Coconut oil,Cocos nucifera,oil|plant-based
+Olive Oil,Olive oil,Olea europaea,oil|plant-based
+Sunflower Oil,Sunflower oil,Helianthus,oil|plant-based
+Canola Oil,Canola oil,Rapeseed oil,oil|plant-based
+Butter,Butter,Dairy butter,fat|animal-derived|allergen
+Lard,Lard,Pork fat,fat|animal-derived
+Tallow,Tallow,Beef fat,fat|animal-derived
+Shortening,Shortening,Vegetable shortening,fat|processed
+Cane Sugar,Cane sugar,Sucrose,sweetener
+Beet Sugar,Beet sugar,Beta vulgaris,sweetener
+Brown Sugar,Brown sugar,Unrefined sugar,sweetener
+Stevia,Stevia,Stevia rebaudiana,sweetener|natural
+Monk Fruit,Monk fruit,Luo han guo,sweetener|natural
+Erythritol,Erythritol,E968,sweetener|sugar-alcohol
+Xylitol,Xylitol,E967,sweetener|sugar-alcohol
+Cacao,Cacao,Cocoa|Theobroma,chocolate
+Vanilla Extract,Vanilla extract,Vanilla essence,flavoring|natural
+Salt,Salt,Sodium chloride,seasoning
+Sea Salt,Sea salt,Marine salt,seasoning
+Yeast,Yeast,Baker's yeast,leavening-agent
+Baking Powder,Baking powder,Leavening agent,leavening-agent
+Baking Soda,Baking soda,Sodium bicarbonate|E500,leavening-agent
+Vinegar,Vinegar,Acetic acid,acidity-regulator
+Apple Cider Vinegar,Apple cider vinegar,ACV,acidity-regulator
+Water,Water,H2O,solvent

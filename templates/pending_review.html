@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Pending Review - Label Detective{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="review-card">
+        <div class="review-icon">⏱️</div>
+        <h1>Review Required</h1>
+        <p>A high-severity allergen or concern was detected. Please review and confirm before we save this scan.</p>
+
+        <div class="verdict-preview">
+            <h2>Preliminary Verdict</h2>
+            <div class="verdict-badge verdict-{{ verdict.verdict }}">
+                {{ verdict.verdict | upper }}
+            </div>
+            <p>{{ verdict.summary }}</p>
+        </div>
+
+        <form action="{{ url_for('review') }}" method="POST">
+            <input type="hidden" name="review_id" value="{{ review_id }}">
+            
+            <label for="notes">Add notes (optional):</label>
+            <textarea name="notes" id="notes" rows="3" class="form-control"></textarea>
+
+            <div class="button-group">
+                <button type="submit" name="action" value="confirm" class="btn btn-primary">
+                    ✓ Confirm & Save
+                </button>
+                <button type="submit" name="action" value="reject" class="btn btn-secondary">
+                    ✕ Reject
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

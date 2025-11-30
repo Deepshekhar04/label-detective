@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Your Profile - Label Detective{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Your Profile</h1>
+    <p class="subtitle">Customize your preferences for personalized ingredient analysis</p>
+
+    <form action="{{ url_for('profile') }}" method="POST" class="profile-form">
+        <!-- Display Name -->
+        <div class="form-section">
+            <label for="display_name">Display Name</label>
+            <input type="text" name="display_name" id="display_name" value="{{ profile.display_name }}" class="form-control">
+        </div>
+
+        <!-- Allergies -->
+        <div class="form-section">
+            <h2>Allergies</h2>
+            <div id="allergies-container">
+                {% for allergy in profile.allergies %}
+                <div class="allergy-row">
+                    <input type="text" name="allergy_name" value="{{ allergy.name }}" placeholder="Ingredient name" class="form-control">
+                    <select name="allergy_severity" class="form-control">
+                        <option value="low" {% if allergy.severity == 'low' %}selected{% endif %}>Low</option>
+                        <option value="moderate" {% if allergy.severity == 'moderate' %}selected{% endif %}>Moderate</option>
+                        <option value="high" {% if allergy.severity == 'high' %}selected{% endif %}>High</option>
+                    </select>
+                    <button type="button" onclick="removeRow(this)" class="btn-remove">✕</button>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="button" onclick="addAllergy()" class="btn btn-secondary">+ Add Allergy</button>
+        </div>
+
+        <!-- Diet Tags -->
+        <div class="form-section">
+            <h2>Dietary Preferences</h2>
+            <div class="checkbox-grid">
+                <label><input type="checkbox" name="diet_tags" value="vegan" {% if 'vegan' in profile.diet_tags %}checked{% endif %}> Vegan</label>
+                <label><input type="checkbox" name="diet_tags" value="vegetarian" {% if 'vegetarian' in profile.diet_tags %}checked{% endif %}> Vegetarian</label>
+                <label><input type="checkbox" name="diet_tags" value="gluten-free" {% if 'gluten-free' in profile.diet_tags %}checked{% endif %}> Gluten-Free</label>
+                <label><input type="checkbox" name="diet_tags" value="nut-free" {% if 'nut-free' in profile.diet_tags %}checked{% endif %}> Nut-Free</label>
+                <label><input type="checkbox" name="diet_tags" value="dairy-free" {% if 'dairy-free' in profile.diet_tags %}checked{% endif %}> Dairy-Free</label>
+                <label><input type="checkbox" name="diet_tags" value="halal" {% if 'halal' in profile.diet_tags %}checked{% endif %}> Halal</label>
+                <label><input type="checkbox" name="diet_tags" value="kosher" {% if 'kosher' in profile.diet_tags %}checked{% endif %}> Kosher</label>
+            </div>
+        </div>
+
+        <!-- Sustainability Goals -->
+        <div class="form-section">
+            <h2>Sustainability Goals</h2>
+            <div class="checkbox-grid">
+                <label><input type="checkbox" name="sustainability_goals" value="avoid_palm_oil" {% if 'avoid_palm_oil' in profile.sustainability_goals %}checked{% endif %}> Avoid Palm Oil</label>
+                <label><input type="checkbox" name="sustainability_goals" value="low_co2" {% if 'low_co2' in profile.sustainability_goals %}checked{% endif %}> Low Carbon Footprint</label>
+                <label><input type="checkbox" name="sustainability_goals" value="fair_trade" {% if 'fair_trade' in profile.sustainability_goals %}checked{% endif %}> Fair Trade</label>
+                <label><input type="checkbox" name="sustainability_goals" value="organic" {% if 'organic' in profile.sustainability_goals %}checked{% endif %}> Organic</label>
+            </div>
+        </div>
+
+        <!-- Ingredient Blocklist -->
+        <div class="form-section">
+            <label for="ingredient_blocklist">Custom Blocked Ingredients (comma-separated)</label>
+            <input type="text" name="ingredient_blocklist" id="ingredient_blocklist" value="{{ profile.ingredient_blocklist | join(', ') }}" placeholder="E.g., MSG, HFCS, artificial sweeteners" class="form-control">
+        </div>
+
+        <!-- Explanation Level -->
+        <div class="form-section">
+            <label for="explain_level">Explanation Detail Level</label>
+            <select name="explain_level" id="explain_level" class="form-control">
+                <option value="brief" {% if profile.explain_level == 'brief' %}selected{% endif %}>Brief (verdict only)</option>
+                <option value="detailed" {% if profile.explain_level == 'detailed' %}selected{% endif %}>Detailed (recommended)</option>
+                <option value="citations_only" {% if profile.explain_level == 'citations_only' %}selected{% endif %}>Citations Only</option>
+            </select>
+        </div>
+
+        <!-- Data Consent -->
+        <div class="form-section">
+            <label class="consent-label">
+                <input type="checkbox" name="data_consent" {% if profile.data_consent %}checked{% endif %}>
+                I consent to storing my profile data for personalized analysis
+            </label>
+            <p class="note">Your data is stored securely and never shared. You can delete it anytime.</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-large">Save Profile</button>
+    </form>
+</div>
+
+<script>
+function addAllergy() {
+    const container = document.getElementById('allergies-container');
+    const row = document.createElement('div');
+    row.className = 'allergy-row';
+    row.innerHTML = `
+        <input type="text" name="allergy_name" placeholder="Ingredient name" class="form-control">
+        <select name="allergy_severity" class="form-control">
+            <option value="low">Low</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+        </select>
+        <button type="button" onclick="removeRow(this)" class="btn-remove">✕</button>
+    `;
+    container.appendChild(row);
+}
+
+function removeRow(btn) {
+    btn.parentElement.remove();
+}
+</script>
+{% endblock %}

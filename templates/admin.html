@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Evaluation{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Admin Evaluation</h1>
+    <p class="subtitle">Upload golden dataset to evaluate agent performance</p>
+
+    <!-- Upload Form -->
+    <div class="upload-card">
+        <form action="{{ url_for('admin_evaluate') }}" method="POST" enctype="multipart/form-data">
+            <label for="golden_dataset">Upload Golden Dataset CSV:</label>
+            <input type="file" name="golden_dataset" id="golden_dataset" accept=".csv" required>
+            <p class="note">CSV should have columns: id, input_text_or_image_url, expected_verdict, expected_ingredient_flags</p>
+            <button type="submit" class="btn btn-primary">Run Evaluation</button>
+        </form>
+    </div>
+
+    <!-- Results -->
+    {% if metrics %}
+    <div class="metrics-section">
+        <h2>Evaluation Results</h2>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">{{ metrics.total_tests }}</div>
+                <div class="metric-label">Total Tests</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ metrics.avg_score }}%</div>
+                <div class="metric-label">Avg Score</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ metrics.accuracy }}%</div>
+                <div class="metric-label">Accuracy</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ metrics.correct_verdicts }}</div>
+                <div class="metric-label">Correct Verdicts</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <h3>Per-Item Results</h3>
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Input</th>
+                    <th>Expected</th>
+                    <th>Actual</th>
+                    <th>Score</th>
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr class="{% if result.score < 50 %}row-fail{% elif result.score < 80 %}row-partial{% else %}row-pass{% endif %}">
+                    <td>{{ result.id }}</td>
+                    <td>{{ result.input }}</td>
+                    <td><span class="verdict-badge verdict-{{ result.expected }}">{{ result.expected }}</span></td>
+                    <td><span class="verdict-badge verdict-{{ result.actual }}">{{ result.actual }}</span></td>
+                    <td>{{ result.score }}</td>
+                    <td>{{ result.feedback }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

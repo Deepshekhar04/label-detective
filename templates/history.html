@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Scan History - Label Detective{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Your Scan History</h1>
+
+    <!--Filters -->
+    <div class="filters-bar">
+        <form method="GET" action="{{ url_for('history') }}">
+            <label for="verdict">Filter by verdict:</label>
+            <select name="verdict" id="verdict" onchange="this.form.submit()">
+                <option value="">All</option>
+                <option value="safe" {% if filters.verdict == 'safe' %}selected{% endif %}>Safe</option>
+                <option value="caution" {% if filters.verdict == 'caution' %}selected{% endif %}>Caution</option>
+                <option value="avoid" {% if filters.verdict == 'avoid' %}selected{% endif %}>Avoid</option>
+            </select>
+        </form>
+    </div>
+
+    <!-- History Table -->
+    {% if scans %}
+    <div class="table-responsive">
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Summary</th>
+                    <th>Verdict</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for scan in scans %}
+                <tr>
+                    <td>{{ scan.timestamp[:10] if scan.timestamp else 'N/A' }}</td>
+                    <td>{{ scan.summary }}</td>
+                    <td>
+                        <span class="verdict-badge verdict-{{ scan.verdict }}">
+                            {{ scan.verdict | upper }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-small">View Details</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No scans yet! <a href="{{ url_for('index') }}">Start your first scan</a></p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

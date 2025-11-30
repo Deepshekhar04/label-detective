@@ -1,0 +1,330 @@
+{
+  "Propylene glycol": {
+    "tags": ["additive", "humectant", "solvent"],
+    "summary": "A synthetic liquid substance that absorbs water. Used as a humectant and solvent in food products. Generally recognized as safe by FDA.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Propylene_glycol",
+        "title": "Propylene glycol - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-additives-petitions/food-additive-status-list",
+        "title": "FDA Food Additive Status"
+      }
+    ],
+    "confidence": 0.9
+  },
+  "Cochineal": {
+    "tags": ["dye", "animal-derived", "red-dye", "natural"],
+    "summary": "A natural red dye derived from cochineal insects. Used as food coloring (E120). Not suitable for vegans/vegetarians. May cause allergic reactions in some individuals.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Cochineal",
+        "title": "Cochineal - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-ingredients-packaging/color-additives-foods",
+        "title": "FDA Color Additives"
+      }
+    ],
+    "confidence": 0.95
+  },
+  "Tartrazine": {
+    "tags": ["dye", "synthetic", "yellow-dye", "allergen-potential"],
+    "summary": "A synthetic yellow food dye (E102). May cause allergic reactions and hyperactivity in sensitive individuals, especially children. Banned in some countries.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Tartrazine",
+        "title": "Tartrazine - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-ingredients-packaging/color-additives-foods",
+        "title": "FDA Color Additives"
+      }
+    ],
+    "confidence": 0.9
+  },
+  "Sunset Yellow": {
+    "tags": ["dye", "synthetic", "yellow-dye", "allergen-potential"],
+    "summary": "A synthetic orange-yellow food dye (E110). Linked to hyperactivity in children. Requires warning label in EU.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Sunset_Yellow_FCF",
+        "title": "Sunset Yellow - Wikipedia"
+      }
+    ],
+    "confidence": 0.85
+  },
+  "Allura Red": {
+    "tags": ["dye", "synthetic", "red-dye"],
+    "summary": "A synthetic red food dye (E129, Red 40). One of the most commonly used food colorings. Some studies suggest links to hyperactivity in children.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Allura_Red_AC",
+        "title": "Allura Red - Wikipedia"
+      }
+    ],
+    "confidence": 0.85
+  },
+  "Sorbic acid": {
+    "tags": ["preservative", "antimicrobial"],
+    "summary": "A natural antimicrobial preservative (E200). Prevents mold and yeast growth. Generally recognized as safe.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Sorbic_acid",
+        "title": "Sorbic acid - Wikipedia"
+      }
+    ],
+    "confidence": 0.9
+  },
+  "Sodium benzoate": {
+    "tags": ["preservative", "antimicrobial"],
+    "summary": "A synthetic preservative (E211). Effective against bacteria and fungi. When combined with ascorbic acid, may form benzene.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Sodium_benzoate",
+        "title": "Sodium benzoate - Wikipedia"
+      }
+    ],
+    "confidence": 0.88
+  },
+  "Sulphur dioxide": {
+    "tags": ["preservative", "allergen", "antioxidant"],
+    "summary": "A preservative and antioxidant (E220). Common allergen, particularly for asthmatics. Must be declared on labels.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Sulfur_dioxide",
+        "title": "Sulphur dioxide - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.92
+  },
+  "Monosodium glutamate": {
+    "tags": ["flavor-enhancer", "umami", "controversial"],
+    "summary": "A flavor enhancer (E621, MSG) that provides umami taste. Controversial; some report sensitivity symptoms, though scientific evidence is limited.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Monosodium_glutamate",
+        "title": "MSG - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-additives-petitions/questions-and-answers-monosodium-glutamate-msg",
+        "title": "FDA MSG Q&A"
+      }
+    ],
+    "confidence": 0.9
+  },
+  "Palm oil": {
+    "tags": ["oil", "sustainability-concern", "deforestation", "plant-based"],
+    "summary": "A vegetable oil from oil palm fruit. Major sustainability concerns due to deforestation, habitat destruction, and carbon emissions. RSPO certification indicates sustainable sourcing.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Palm_oil",
+        "title": "Palm oil - Wikipedia"
+      },
+      {
+        "url": "https://www.worldwildlife.org/industries/palm-oil",
+        "title": "WWF Palm Oil Impact"
+      }
+    ],
+    "confidence": 0.95
+  },
+  "Peanut oil": {
+    "tags": ["oil", "allergen", "plant-based"],
+    "summary": "Oil extracted from peanuts. Major allergen - can cause severe anaphylactic reactions in allergic individuals. Must be declared on food labels.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Peanut_oil",
+        "title": "Peanut oil - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.98
+  },
+  "Milk": {
+    "tags": ["allergen", "animal-derived", "dairy", "lactose"],
+    "summary": "One of the eight major food allergens. Contains lactose and milk proteins (casein, whey). Not suitable for vegans or lactose-intolerant individuals.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Milk",
+        "title": "Milk - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.98
+  },
+  "Eggs": {
+    "tags": ["allergen", "animal-derived", "protein"],
+    "summary": "One of the eight major food allergens. Common in baked goods and processed foods. Not suitable for vegans.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Egg_allergy",
+        "title": "Egg allergy - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.98
+  },
+  "Wheat": {
+    "tags": ["allergen", "gluten", "grain"],
+    "summary": "One of the eight major food allergens. Contains gluten - unsuitable for celiac disease and gluten sensitivity. Common in bread, pasta, and baked goods.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Wheat_allergy",
+        "title": "Wheat allergy - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.98
+  },
+  "Soybean": {
+    "tags": ["allergen", "plant-based", "protein"],
+    "summary": "One of the eight major food allergens. Widely used in processed foods. Vegan-friendly but allergenic for some individuals.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Soy_allergy",
+        "title": "Soy allergy - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.98
+  },
+  "Peanut": {
+    "tags": ["allergen", "legume", "plant-based"],
+    "summary": "One of the eight major food allergens. Can cause severe, life-threatening anaphylactic reactions. Must be clearly labeled.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Peanut_allergy",
+        "title": "Peanut allergy - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.99
+  },
+  "Tree nut": {
+    "tags": ["allergen", "nut", "plant-based"],
+    "summary": "One of the eight major food allergens. Includes almonds, walnuts, cashews, etc. Can cause severe allergic reactions.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Tree_nut_allergy",
+        "title": "Tree nut allergy - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.98
+  },
+  "Fish": {
+    "tags": ["allergen", "animal-derived", "seafood"],
+    "summary": "One of the eight major food allergens. Includes all fish species. Can cause severe allergic reactions.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Fish_allergy",
+        "title": "Fish allergy - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.98
+  },
+  "Shellfish": {
+    "tags": ["allergen", "animal-derived", "seafood", "crustacean"],
+    "summary": "One of the eight major food allergens. Includes crustaceans (shrimp, crab, lobster) and mollusks (clams, oysters). Can cause severe reactions.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Shellfish_allergy",
+        "title": "Shellfish allergy - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-allergensgluten-free-guidance-documents-regulatory-information/food-allergen-labeling-and-consumer-protection-act-2004-falcpa",
+        "title": "FDA Allergen Labeling"
+      }
+    ],
+    "confidence": 0.98
+  },
+  "Gelatin": {
+    "tags": ["animal-derived", "protein", "gelling-agent"],
+    "summary": "A protein derived from animal collagen (usually pork or beef). Used as a gelling agent. Not suitable for vegetarians or vegans.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gelatin",
+        "title": "Gelatin - Wikipedia"
+      }
+    ],
+    "confidence": 0.95
+  },
+  "High fructose corn syrup": {
+    "tags": ["sweetener", "processed", "controversial"],
+    "summary": "A processed sweetener derived from corn. Linked to obesity and metabolic issues when consumed in excess. Common in sodas and processed foods.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/High-fructose_corn_syrup",
+        "title": "HFCS - Wikipedia"
+      }
+    ],
+    "confidence": 0.9
+  },
+  "Aspartame": {
+    "tags": ["sweetener", "artificial", "low-calorie"],
+    "summary": "An artificial sweetener (E951). About 200 times sweeter than sugar. Controversial; some individuals report sensitivity. Unsafe for people with phenylketonuria (PKU).",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Aspartame",
+        "title": "Aspartame - Wikipedia"
+      },
+      {
+        "url": "https://www.fda.gov/food/food-additives-petitions/additional-information-about-high-intensity-sweeteners-permitted-use-food-united-states",
+        "title": "FDA Sweeteners"
+      }
+    ],
+    "confidence": 0.92
+  },
+  "Carrageenan": {
+    "tags": ["thickener", "seaweed", "plant-based", "controversial"],
+    "summary": "A thickener extracted from red seaweed (E407). Vegan-friendly. Some controversy about digestive effects, though food-grade carrageenan is generally recognized as safe.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Carrageenan",
+        "title": "Carrageenan - Wikipedia"
+      }
+    ],
+    "confidence": 0.85
+  },
+  "Lecithin": {
+    "tags": ["emulsifier", "plant-based", "animal-derived"],
+    "summary": "An emulsifier (E322) typically derived from soybeans or eggs. Soy lecithin is vegan; egg lecithin is not. Generally recognized as safe.",
+    "evidence": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Lecithin",
+        "title": "Lecithin - Wikipedia"
+      }
+    ],
+    "confidence": 0.9
+  }
+}

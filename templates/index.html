@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}Label Detective - Decode Your Food Labels{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">Decode Your Food Labels with AI</h1>
+        <p class="hero-subtitle">Get personalized verdicts on ingredients based on your allergies, diet, and values</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="input-card">
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="switchTab('text')">📝 Paste Text</button>
+            <button class="tab-btn" onclick="switchTab('image')">📸 Upload Image</button>
+            <button class="tab-btn" onclick="switchTab('search')">🔍 Search Product</button>
+        </div>
+
+        <form action="{{ url_for('scan') }}" method="POST" enctype="multipart/form-data" id="scanForm">
+            <!-- Text Input Tab -->
+            <div class="tab-content active" id="tab-text">
+                <input type="hidden" name="input_type" value="text" id="input_type">
+                <label for="ingredient_text">Paste your ingredient list:</label>
+                <textarea 
+                    name="ingredient_text" 
+                    id="ingredient_text" 
+                    rows="8" 
+                    placeholder="Example: Sugar, Wheat Flour, Palm Oil, E120, Water, Salt..."
+                ></textarea>
+            </div>
+
+            <!-- Image Upload Tab -->
+            <div class="tab-content" id="tab-image">
+                <label for="ingredient_image">Upload a photo of the ingredient label:</label>
+                <div class="file-upload-container">
+                    <input 
+                        type="file" 
+                        name="ingredient_image" 
+                        id="ingredient_image" 
+                        accept="image/*"
+                        onchange="previewImage(this)"
+                    >
+                    <div class="file-upload-label">
+                        <span class="upload-icon">📷</span>
+                        <span>Click to upload or drag & drop</span>
+                    </div>
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+            </div>
+
+            <!-- Product Search Tab (Future Feature) -->
+            <div class="tab-content" id="tab-search">
+                <label for="product_query">Search by product name or barcode:</label>
+                <input 
+                    type="text" 
+                    name="product_query" 
+                    id="product_query" 
+                    placeholder="Enter product name or scan barcode..."
+                >
+                <p class="note">⚠️ Product search coming soon! Use paste text or upload image for now.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large">Analyze Ingredients</button>
+        </form>
+    </div>
+
+    <!-- Quick Examples -->
+    <div class="examples-section">
+        <h2>Try These Examples</h2>
+        <div class="examples-grid">
+            <div class="example-card" onclick="fillExample('E120, E122, Sugar, Palm Oil, Water')">
+                <h3>🎨 Synthetic Dyes</h3>
+                <p>Test with common food colorings</p>
+            </div>
+            <div class="example-card" onclick="fillExample('Milk, Eggs, Wheat Flour, Soy Lecithin')">
+                <h3>🥛 Common Allergens</h3>
+                <p>Check allergy compatibility</p>
+            </div>
+            <div class="example-card" onclick="fillExample('Palm Oil, HFCS, Gelatin, Carmine')">
+                <h3>🌱 Vegan Check</h3>
+                <p>Test for animal-derived ingredients</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="features-section">
+        <h2>How It Works</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">🔍</div>
+                <h3>Extract</h3>
+                <p>OCR and AI extract ingredients from images or text</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🧠</div>
+                <h3>Analyze</h3>
+                <p>Cross-reference with allergen, dietary, and sustainability databases</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✅</div>
+                <h3>Verdict</h3>
+                <p>Get personalized Safe/Caution/Avoid recommendations</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Evidence</h3>
+                <p>View sources and scientific evidence for each ingredient</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function switchTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Show selected tab
+    document.getElementById('tab-' + tabName).classList.add('active');
+    event.target.classList.add('active');
+    
+    // Update input type
+    document.getElementById('input_type').value = tabName;
+}
+
+function fillExample(text) {
+    document.getElementById('ingredient_text').value = text;
+    switchTab('text');
+    document.querySelector('.tab-btn').click();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function previewImage(input) {
+    const preview = document.getElementById('imagePreview');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+{% endblock %}
