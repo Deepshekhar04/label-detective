@@ -68,7 +68,7 @@ class LabelDetectiveOrchestrator:
         )
 
         try:
-            # Step 1: Extract ingredients
+            # Extract ingredients
             extraction_start = time.time()
             extraction_result = self.extractor.extract(
                 input_payload["input_type"], input_payload["raw_input"], trace_id
@@ -91,7 +91,7 @@ class LabelDetectiveOrchestrator:
                     session_id, trace_id, "No ingredients found in input"
                 )
 
-            # Step 2: Normalize ingredients
+            # Normalize ingredients
             normalization_start = time.time()
             normalization_result = self.normalizer.normalize(ingredients, trace_id)
             normalization_duration = (time.time() - normalization_start) * 1000
@@ -107,7 +107,7 @@ class LabelDetectiveOrchestrator:
 
             canonical_ingredients = normalization_result["canonical_ingredients"]
 
-            # Step 3: Lookup ingredient facts (parallel)
+            # Lookup ingredient facts (parallel)
             lookup_start = time.time()
             lookup_result = self.lookup.lookup_all(canonical_ingredients, trace_id)
             lookup_duration = (time.time() - lookup_start) * 1000
@@ -123,7 +123,7 @@ class LabelDetectiveOrchestrator:
 
             ingredient_data = lookup_result["ingredient_data"]
 
-            # Step 4: Match with user profile
+            # Match with user profile
             user_profile = input_payload.get("user_profile", {})
 
             matching_start = time.time()
@@ -139,7 +139,7 @@ class LabelDetectiveOrchestrator:
                 }
             )
 
-            # Step 5: Check if HITL review is needed
+            # Check if HITL review is needed
             review_id = None
             if match_result["requires_review"]:
                 logger.warning(
@@ -159,7 +159,7 @@ class LabelDetectiveOrchestrator:
                     }
                 )
 
-            # Step 6: Generate explanation
+            # Generate explanation
             explain_start = time.time()
             explanation = self.explainer.explain(
                 match_result, ingredient_data, user_profile, trace_id

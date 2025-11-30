@@ -1,5 +1,5 @@
 """
-Normalizer Agent - Maps raw ingredient names to canonical names.
+Normalizer Agent -> Maps raw ingredient names to canonical names.
 """
 
 from typing import Dict, List, Any
@@ -13,16 +13,7 @@ class NormalizerAgent:
     """Normalizes ingredient names to canonical forms."""
 
     def normalize(self, ingredients: List[str], trace_id: str) -> Dict[str, Any]:
-        """
-        Normalize ingredient list to canonical names.
-
-        Args:
-            ingredients: List of raw ingredient names
-            trace_id: Trace identifier
-
-        Returns:
-            Dictionary with mapping and normalized list
-        """
+        """Normalize ingredient list to canonical names."""
         logger.info(f"[{trace_id}] Normalizing {len(ingredients)} ingredients")
 
         mapping = {}

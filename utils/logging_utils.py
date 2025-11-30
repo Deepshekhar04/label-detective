@@ -39,16 +39,7 @@ class JSONFormatter(logging.Formatter):
 
 
 def setup_logger(name: str = "label_detective", level: str = "INFO") -> logging.Logger:
-    """
-    Configure and return a logger with JSON formatting.
-
-    Args:
-        name: Logger name
-        level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-
-    Returns:
-        Configured logger instance
-    """
+    """Configure and return a logger with JSON formatting."""
     logger = logging.getLogger(name)
     logger.setLevel(getattr(logging, level.upper()))
 
@@ -64,12 +55,7 @@ def setup_logger(name: str = "label_detective", level: str = "INFO") -> logging.
 
 
 def create_trace_id() -> str:
-    """
-    Generate a unique trace ID for request tracing.
-
-    Returns:
-        UUID string for trace identification
-    """
+    """Generate a unique trace ID for request tracing."""
     return str(uuid.uuid4())
 
 
@@ -84,20 +70,7 @@ def log_span(
     session_id: Optional[str] = None,
     user_id: Optional[str] = None,
 ) -> None:
-    """
-    Log a span event for a tool call with timing and context information.
-
-    Args:
-        logger: Logger instance
-        trace_id: Trace identifier
-        agent_name: Name of the agent making the call
-        tool_name: Name of the tool being called
-        input_data: Input parameters (will be truncated if large)
-        output_data: Output result (will be summarized if large)
-        duration_ms: Execution duration in milliseconds
-        session_id: Optional session identifier
-        user_id: Optional user identifier
-    """
+    """Log a span event for a tool call with timing and context information."""
     # Truncate large inputs/outputs for logging
     input_summary = str(input_data)[:200] if input_data else ""
     output_summary = str(output_data)[:200] if output_data else ""
@@ -121,15 +94,7 @@ def log_span(
 
 
 def get_logger(name: str) -> logging.Logger:
-    """
-    Get or create a logger instance.
-
-    Args:
-        name: Module or component name
-
-    Returns:
-        Logger instance
-    """
+    """Get or create a logger instance."""
     return logging.getLogger(f"label_detective.{name}")
 
 

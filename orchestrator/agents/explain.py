@@ -1,5 +1,5 @@
 """
-Explain Agent - Formats verdict and generates user-friendly explanations.
+Explain Agent -> Formats verdict and generates user-friendly explanations.
 """
 
 from typing import Dict, List, Any
@@ -19,18 +19,7 @@ class ExplainAgent:
         user_profile: Dict[str, Any],
         trace_id: str,
     ) -> Dict[str, Any]:
-        """
-        Generate user-facing explanation with adaptive detail level.
-
-        Args:
-            match_result: Result from Matcher Agent
-            ingredient_data: Ingredient facts from Lookup Agent
-            user_profile: User profile with explain_level preference
-            trace_id: Trace identifier
-
-        Returns:
-            Formatted explanation with verdict, details, and alternatives
-        """
+        """Generate user-facing explanation with adaptive detail level."""
         logger.info(
             f"[{trace_id}] Generating explanation (level: {user_profile.get('explain_level', 'detailed')})"
         )
@@ -39,7 +28,6 @@ class ExplainAgent:
         verdict = match_result["overall_verdict"]
         conflicts = match_result["conflicts"]
 
-        # Generate explanation based on level
         if explain_level == "brief":
             explanation = self._generate_brief(verdict, conflicts)
         elif explain_level == "citations_only":
@@ -47,7 +35,6 @@ class ExplainAgent:
         else:  # detailed
             explanation = self._generate_detailed(verdict, conflicts, match_result)
 
-        # Generate alternatives for conflicting ingredients
         alternatives = []
         if conflicts:
             conflict_tags = []

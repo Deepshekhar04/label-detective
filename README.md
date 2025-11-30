@@ -23,35 +23,28 @@ AI-powered food ingredient analyzer that helps users identify potential allergen
   - Google Custom Search API
   - Firestore database
 
-### Installation
-
-1. **Clone the repository**
+### 1. Installation
 
 ```bash
+# Clone and setup environment
 git clone <repository-url>
 cd label-detective
-```
-
-1. **Create virtual environment**
-
-```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-1. **Install dependencies**
-
-```bash
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-1. **Set up environment variables**
+### 2. Configuration
 
 Create a `.env` file in the root directory:
 
 ```env
 # Flask Configuration
 FLASK_SECRET_KEY=your-secret-key-here
+FLASK_ENV=development
+PORT=5000
 
 # Google Cloud Configuration
 FIRESTORE_PROJECT_ID=your-project-id
@@ -66,13 +59,15 @@ GOOGLE_CSE_API_KEY=your-custom-search-api-key
 # Optional Configuration
 SESSION_TTL_DAYS=30
 MAX_PARALLEL_LOOKUPS=6
-PORT=5000
-FLASK_ENV=development
 ```
 
-1. **Run the application**
+### 3. Verification & Running
 
 ```bash
+# Run unit tests to verify setup
+pytest tests/test_tools.py -v
+
+# Start the application
 python app.py
 ```
 
@@ -108,12 +103,12 @@ label-detective/
 
 The application uses specialized agents that work together:
 
-1. **Extractor Agent**: Extracts ingredient text from images using OCR
-1. **Normalizer Agent**: Maps raw ingredient names to canonical forms
-1. **Lookup Agent**: Retrieves ingredient facts with parallel execution
-1. **Matcher Agent**: Compares ingredients against user profile
-1. **Explain Agent**: Generates user-friendly explanations
-1. **Evaluator Agent**: Assesses output quality using LLM-based judgment
+- **Extractor Agent**: Extracts ingredient text from images using OCR
+- **Normalizer Agent**: Maps raw ingredient names to canonical forms
+- **Lookup Agent**: Retrieves ingredient facts with parallel execution
+- **Matcher Agent**: Compares ingredients against user profile
+- **Explain Agent**: Generates user-friendly explanations
+- **Evaluator Agent**: Assesses output quality using LLM-based judgment
 
 ### Technology Stack
 
@@ -127,25 +122,18 @@ The application uses specialized agents that work together:
 
 ### Scanning Ingredients
 
-1. **Text Input**: Paste ingredient list directly
-1. **Image Upload**: Upload a photo of the ingredient label
+- **Text Input**: Paste ingredient list directly
+- **Image Upload**: Upload a photo of the ingredient label
 
 ### Managing Profile
 
-Configure your dietary preferences:
+Configure your personal health and ethical preferences to get tailored analysis:
 
-```python
-{
-  "allergies": [
-    {"name": "Peanut", "severity": "high"},
-    {"name": "Milk", "severity": "moderate"}
-  ],
-  "diet_tags": ["vegan", "gluten-free"],
-  "sustainability_goals": ["avoid_palm_oil"],
-  "ingredient_blocklist": ["MSG", "Artificial colors"],
-  "explain_level": "detailed"  # Options: "brief", "detailed", "citations_only"
-}
-```
+- **Allergies**: Define specific allergens with severity levels (e.g., *Peanut (High)*, *Milk (Moderate)*).
+- **Dietary Requirements**: Select from standard diets like *Vegan*, *Vegetarian*, *Gluten-Free*, etc.
+- **Sustainability Goals**: Set preferences for ethical consumption, such as *Avoid Palm Oil*.
+- **Ingredient Blocklist**: Custom list of specific ingredients you wish to avoid (e.g., *MSG*, *Artificial Colors*).
+- **Explanation Detail**: Choose your preferred depth of analysis (*Brief*, *Detailed*, or *Citations Only*).
 
 ### Understanding Results
 
@@ -157,87 +145,17 @@ Results include:
 - **Alternatives**: Suggested alternative products
 - **Ingredient Table**: Complete breakdown with tags
 
-## Testing
+## Key Endpoints
 
-Run unit tests:
+- **Scan**: `POST /scan` - Submit ingredient text or image for analysis.
+- **Profile**: `GET /profile` - Manage user preferences and allergies.
+- **History**: `GET /history` - View past scan results.
+- **Metrics**: `GET /metrics` - Prometheus application metrics.
+- **Internal**: `/api/*` routes for history saving and blocklist management.
 
-```bash
-pytest tests/test_tools.py -v
-```
+## License & Support
 
-## Deployment
-
-### Google Cloud Run
-
-1. **Build and deploy**
-
-```bash
-gcloud run deploy label-detective \
-  --source . \
-  --region us-central1 \
-  --allow-unauthenticated
-```
-
-1. **Set environment variables** via Cloud Run console or:
-
-```bash
-gcloud run services update label-detective \
-  --set-env-vars FIRESTORE_PROJECT_ID=your-project-id,GENAI_API_KEY=your-key
-```
-
-## Security & Privacy
-
-- Session keys stored in `.env` (not committed)
-- User data encrypted in Firestore
-- No third-party tracking
-- Credentials in `.gitignore`
-- HTTPS enforced in production
-
-## Performance
-
-- **Parallel Execution**: Up to 6 concurrent ingredient lookups
-- **Caching**: Local ingredient database for common items
-- **TTL Management**: Automatic session cleanup (30-day default)
-- **Monitoring**: Prometheus metrics at `/metrics`
-
-## API Endpoints
-
-### Public Routes
-
-- `GET /` - Home page with scan interface
-- `POST /scan` - Submit ingredient scan
-- `GET /profile` - User profile management
-- `GET /history` - Scan history
-- `GET /metrics` - Prometheus metrics
-
-### API Routes
-
-- `POST /api/save_to_history` - Save scan to history
-- `POST /api/block_ingredient` - Add ingredient to blocklist
-- `POST /api/accept_disclaimer` - Accept disclaimer
-
-## Monitoring
-
-Access Prometheus metrics:
-
-```plaintext
-http://localhost:5000/metrics
-```
-
-Metrics include:
-
-- Request counts by endpoint
-- Response times
-- Error rates
-- Active sessions
-
-## License
-
-This project is licensed under the MIT License.
-
-## Support
-
-For issues or questions, please open an issue on GitHub.
+This project is licensed under the MIT License. For issues or questions, please open an issue on GitHub.
 
 ---
 

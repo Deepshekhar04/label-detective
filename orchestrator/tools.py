@@ -60,16 +60,7 @@ _load_ingredient_data()
 
 
 def ocr_image(image_bytes: bytes) -> Dict[str, Any]:
-    """
-    Extract text from image using Google Vision API.
-
-    Args:
-        image_bytes: Image data as bytes
-
-    Returns:
-        Dictionary with extracted text and confidence
-        {" text": str, "confidence": float}
-    """
+    """Extract text from image using Google Vision API."""
     try:
         from google.cloud import vision
 
@@ -95,16 +86,7 @@ def ocr_image(image_bytes: bytes) -> Dict[str, Any]:
 
 
 def canonicalize_ingredient(raw_name: str) -> Dict[str, Any]:
-    """
-    Map raw ingredient name to canonical form (e.g., E120 -> Cochineal).
-
-    Args:
-        raw_name: Raw ingredient string
-
-    Returns:
-        Dictionary with canonical name, synonyms, and source
-        {"canonical_name": str, "synonyms": [str], "source": "local"|"lookup"}
-    """
+    """Map raw ingredient name to canonical form (e.g., E120 -> Cochineal)."""
     # Clean the raw name
     clean_name = raw_name.strip().lower()
     clean_name = re.sub(r"[^a-z0-9\s-]", "", clean_name)
@@ -135,16 +117,7 @@ def canonicalize_ingredient(raw_name: str) -> Dict[str, Any]:
 
 
 def lookup_ingredient(canonical_name: str) -> Dict[str, Any]:
-    """
-    Retrieve ingredient facts and evidence from local database or web search.
-
-    Args:
-        canonical_name: Canonical ingredient name
-
-    Returns:
-        Dictionary with tags, summary, evidence, and confidence
-        {"tags": [str], "summary": str, "evidence": [{"url": str, "title": str}], "confidence": float}
-    """
+    """Retrieve ingredient facts and evidence from local database or web search."""
     # Check local facts first
     if canonical_name in INGREDIENT_FACTS:
         return INGREDIENT_FACTS[canonical_name]
@@ -235,17 +208,7 @@ def _lookup_via_web_search(ingredient_name: str) -> Dict[str, Any]:
 def match_with_profile(
     ingredient_tags: List[str], user_profile: Dict[str, Any]
 ) -> Dict[str, Any]:
-    """
-    Compare ingredient tags with user profile to detect conflicts.
-
-    Args:
-        ingredient_tags: List of tags for the ingredient
-        user_profile: User profile with allergies, diet tags, etc.
-
-    Returns:
-        Dictionary with conflict level, severity, and reason
-        {"conflict_level": "none"|"caution"|"avoid", "severity": "low"|"moderate"|"high", "reason": str}
-    """
+    """Compare ingredient tags with user profile to detect conflicts."""
     conflicts = []
     max_severity = "low"
     conflict_level = "none"
@@ -338,17 +301,7 @@ def match_with_profile(
 def suggest_alternatives(
     conflict_tags: List[str], category: str
 ) -> List[Dict[str, Any]]:
-    """
-    Suggest alternative products based on detected conflicts.
-
-    Args:
-        conflict_tags: List of conflicting tags
-        category: Product category
-
-    Returns:
-        List of alternative suggestions
-        [{"product_name": str, "reason": str, "link": str}]
-    """
+    """Suggest alternative products based on detected conflicts."""
     alternatives = []
 
     # Simple rule-based alternatives

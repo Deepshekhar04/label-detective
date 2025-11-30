@@ -11,15 +11,7 @@ logger = get_logger("tools_google")
 
 
 def ocr_with_google_vision(image_bytes: bytes) -> Dict[str, Any]:
-    """
-    Extract text using Google Vision API.
-
-    Args:
-        image_bytes: Image data as bytes
-
-    Returns:
-        {"text": str, "confidence": float}
-    """
+    """Extract text using Google Vision API."""
     try:
         from google.cloud import vision
 
@@ -45,15 +37,7 @@ def ocr_with_google_vision(image_bytes: bytes) -> Dict[str, Any]:
 
 
 def search_with_google_custom_search(query: str) -> Dict[str, Any]:
-    """
-    Search using Google Custom Search API.
-
-    Args:
-        query: Search query
-
-    Returns:
-        Search results dictionary
-    """
+    """Search using Google Custom Search API."""
     api_key = os.getenv("GOOGLE_SEARCH_API_KEY")
     engine_id = os.getenv("GOOGLE_SEARCH_ENGINE_ID")
 

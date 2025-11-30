@@ -13,22 +13,10 @@ logger = get_logger("agents.evaluator")
 class EvaluatorAgent:
     """Evaluates agent output against golden answers or rubrics."""
 
-    def __init__(self):
-        pass
-
     def evaluate(
         self, agent_output: Dict[str, Any], expected: Dict[str, Any]
     ) -> Dict[str, Any]:
-        """
-        Evaluate scan result against expected output using LLM-based judgment.
-
-        Args:
-            agent_output: Output from the orchestrator
-            expected: Expected golden answer
-
-        Returns:
-            Evaluation result with score and feedback
-        """
+        """Evaluate scan result against expected output using LLM-based judgment."""
         return self._evaluate_with_llm(agent_output, expected)
 
     def _evaluate_with_llm(

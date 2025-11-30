@@ -1,5 +1,5 @@
 """
-Extractor Agent - Extracts and cleans ingredient text from images or raw input.
+Extractor Agent -> Extracts and cleans ingredient text from images or raw input.
 """
 
 from typing import Dict, List, Any
@@ -78,14 +78,8 @@ class ExtractorAgent:
         self, product_query: str, trace_id: str
     ) -> Dict[str, Any]:
         """Extract from product search (future feature)."""
-        logger.warning(f"[{trace_id}] Product search not yet implemented")
-
-        return {
-            "ingredients": [],
-            "raw_text": product_query,
-            "confidence": 0.0,
-            "error": "Product search not yet implemented",
-        }
+        # TODO: Implement product search via Google Shopping API
+        raise NotImplementedError("Product search not supported yet")
 
     def _clean_text(self, text: str) -> str:
         """
@@ -98,6 +92,7 @@ class ExtractorAgent:
             Cleaned text containing only ingredients
         """
         # Remove common non-ingredient prefixes
+        # Common junk text found on labels
         patterns_to_remove = [
             r"ingredients?\s*:",  # "Ingredients:"
             r"contains?\s*:",  # "Contains:"

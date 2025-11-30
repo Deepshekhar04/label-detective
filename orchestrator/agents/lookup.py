@@ -1,5 +1,5 @@
 """
-Lookup Agent - Knowledge retrieval specialist with parallel execution.
+Lookup Agent -> Knowledge retrieval specialist with parallel execution.
 """
 
 import os
@@ -21,23 +21,13 @@ class LookupAgent:
     def lookup_all(
         self, canonical_ingredients: List[str], trace_id: str
     ) -> Dict[str, Any]:
-        """
-        Parallel ingredient lookup for faster processing.
-
-        Args:
-            canonical_ingredients: List of canonical ingredient names
-            trace_id: Trace identifier
-
-        Returns:
-            Dictionary mapping ingredients to their facts
-        """
+        """Parallel ingredient lookup for faster processing."""
         logger.info(
             f"[{trace_id}] Looking up {len(canonical_ingredients)} ingredients (max parallel: {self.max_parallel})"
         )
 
         ingredient_data = {}
 
-        # Use ThreadPoolExecutor for parallel lookups
         with ThreadPoolExecutor(max_workers=self.max_parallel) as executor:
             futures = {
                 executor.submit(self._lookup_single, ingredient, trace_id): ingredient

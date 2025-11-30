@@ -30,28 +30,14 @@ def initialize_db():
 
 
 def get_user(user_id: str) -> Optional[Dict[str, Any]]:
-    """
-    Retrieve user profile.
-
-    Args:
-        user_id: User identifier
-
-    Returns:
-        User profile dictionary or None if not found
-    """
+    """Retrieve user profile from Firestore."""
     doc_ref = _db_connection.collection("users").document(user_id)
     doc = doc_ref.get()
     return doc.to_dict() if doc.exists else None
 
 
 def save_user(user_id: str, profile_data: Dict[str, Any]) -> None:
-    """
-    Save or update user profile.
-
-    Args:
-        user_id: User identifier
-        profile_data: User profile dictionary
-    """
+    """Save or update user profile."""
     profile_data["last_active_at"] = datetime.utcnow().isoformat()
     doc_ref = _db_connection.collection("users").document(user_id)
     doc_ref.set(profile_data, merge=True)
@@ -59,12 +45,7 @@ def save_user(user_id: str, profile_data: Dict[str, Any]) -> None:
 
 
 def save_session(session_data: Dict[str, Any]) -> None:
-    """
-    Save session trace with automatic TTL management.
-
-    Args:
-        session_data: Session dictionary with events trace
-    """
+    """Save session trace with automatic TTL management."""
     session_id = session_data["session_id"]
     ttl_days = int(os.getenv("SESSION_TTL_DAYS", "30"))
     ttl_date = (datetime.utcnow() + timedelta(days=ttl_days)).isoformat()
@@ -83,16 +64,7 @@ def get_session(session_id: str) -> Optional[Dict[str, Any]]:
 
 
 def save_scan_history(user_id: str, scan_summary: Dict[str, Any]) -> str:
-    """
-    Save scan to user's history.
-
-    Args:
-        user_id: User identifier
-        scan_summary: Summary of scan result
-
-    Returns:
-        scan_id
-    """
+    """Save scan to user's history."""
     from utils.logging_utils import create_trace_id
 
     scan_id = create_trace_id()

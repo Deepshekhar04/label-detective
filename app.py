@@ -19,17 +19,12 @@ from orchestrator.agents.evaluator import EvaluatorAgent
 # Load environment variables
 load_dotenv()
 
-# Initialize Flask app
+# App & Service Initialization
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key-change-in-production")
 
-# Initialize logger
 logger = setup_logger(level=os.getenv("LOG_LEVEL", "INFO"))
-
-# Initialize database
 db.initialize_db()
-
-# Initialize orchestrator
 orchestrator = LabelDetectiveOrchestrator()
 
 # Metrics
@@ -406,14 +401,5 @@ def internal_error(e):
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     debug = os.getenv("FLASK_ENV") == "development"
-
-    print("╔══════════════════════════════════════════════════╗")
-    print("║        Label Detective - Starting Server         ║")
-    print("╠══════════════════════════════════════════════════╣")
-    print(f"║  URL: http://localhost:{port}                      ║")
-    print(
-        f"║  Environment: {os.getenv('FLASK_ENV', 'production')}                        ║"
-    )
-    print("╚══════════════════════════════════════════════════╝")
 
     app.run(host="0.0.0.0", port=port, debug=debug)

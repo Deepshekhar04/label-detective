@@ -1,5 +1,5 @@
 """
-Matcher Agent - Compares ingredients with user profile for personalized analysis.
+Matcher Agent -> Compares ingredients with user profile for personalized analysis.
 """
 
 from typing import Dict, List, Any
@@ -18,17 +18,7 @@ class MatcherAgent:
         user_profile: Dict[str, Any],
         trace_id: str,
     ) -> Dict[str, Any]:
-        """
-        Match ingredients with user profile for personalized health verdicts.
-
-        Args:
-            ingredient_data: Dictionary mapping ingredients to their facts
-            user_profile: User profile with allergies, diet tags, etc.
-            trace_id: Trace identifier
-
-        Returns:
-            Dictionary with overall verdict and per-ingredient conflicts
-        """
+        """Match ingredients with user profile for personalized health verdicts."""
         logger.info(
             f"[{trace_id}] Matching {len(ingredient_data)} ingredients with user profile"
         )
@@ -41,7 +31,6 @@ class MatcherAgent:
         for ingredient, facts in ingredient_data.items():
             tags = facts.get("tags", [])
 
-            # Match with profile
             match_result = tools.match_with_profile(tags, user_profile)
 
             conflict_info = {
@@ -53,7 +42,6 @@ class MatcherAgent:
                 "evidence": facts.get("evidence", []),
             }
 
-            # Update overall verdict
             if match_result["conflict_level"] == "avoid":
                 overall_verdict = "avoid"
                 if match_result["severity"] == "high":
@@ -68,7 +56,6 @@ class MatcherAgent:
             ):
                 overall_verdict = "caution"
 
-            # Only add if there's a conflict
             if match_result["conflict_level"] != "none":
                 conflicts.append(conflict_info)
 
